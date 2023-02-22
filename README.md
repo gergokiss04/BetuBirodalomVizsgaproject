@@ -13,3 +13,8 @@ Scaffold-DbContext "server=localhost;database=bookshop;user=root;password=;ssl m
 
 
 Az adatbázis tartalmazza a project bookshop (1).sql néven!
+
+[JsonIgnore] parancsot kell jól elhelyezni ami garantálja a sikeres működést ha több táblával dolgozunk ami össze van kötve.
+
+Hasznos anyag hozzá:
+https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/ignore-properties?pivots=dotnet-6-0&fbclid=IwAR3Ww7u7bd24LZ1SbsRQOi19FUvt9lU1sPVzMHUiQK4lVMN9ihcUAIaUAok
