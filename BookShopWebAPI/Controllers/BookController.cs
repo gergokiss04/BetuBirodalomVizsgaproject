@@ -1,10 +1,11 @@
 ﻿using BookShopWebAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookShopWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BookController : ControllerBase
     {
@@ -16,7 +17,7 @@ namespace BookShopWebAPI.Controllers
             {
                 try
                 {
-                    return Ok(context.Books.ToList());
+                    return Ok(context.Books.Include(c=>c.Genre).ToList());
                 }
                 catch (Exception ex)
                 {
@@ -27,7 +28,7 @@ namespace BookShopWebAPI.Controllers
         }
 
 
-        [HttpGet("Current_book{id}")]
+        [HttpGet("{id}")]
 
         public async Task<ActionResult<Book>> GetBook(int id)
         {
@@ -56,7 +57,7 @@ namespace BookShopWebAPI.Controllers
             }
         }
 
-        [HttpGet("Genre_book{id}")]
+        [HttpGet("Genre_book/{id}")]
 
         public IActionResult Getgenre(int id)
         {
