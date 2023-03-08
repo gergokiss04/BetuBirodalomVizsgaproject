@@ -1,0 +1,160 @@
+#header-footer-background-image{
+    background-image: url(img/footer.jpg);
+}
+
+.carousel-inner{
+    max-height: 700px;
+}
+
+.light-brown-background-color{
+  background-color: rgb(145, 115, 89);
+}
+
+body {
+    position: relative; 
+}
+
+#successful-login{
+  background-color: rgb(104, 85, 68);
+      background-repeat: no-repeat;
+  width: 100% 100%;
+}
+
+.dark-brown-background-color{
+  background-color: rgb(58, 36, 25);
+  background-repeat: no-repeat;
+width: 100% 100%;
+}
+
+#main-background-image{
+  background-image: url(img/mainbackgroundimage.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.scrollspy{
+    padding:50px 20px;
+    border-radius:15px 50px 30px;
+    margin-bottom: 15px;
+    border: 6px solid rgb(165, 134, 105);
+    text-align: center;
+    border-style: outset;
+
+}
+
+.footermargin{
+    margin-bottom: 20px;
+}
+
+.none-text-decoration{
+    text-decoration: none;
+}
+  
+.left{
+    float: left;
+    text-align: left;
+    color:white;
+    
+}
+
+#colorblack{
+  color: black;
+}
+
+.contact-center{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  
+  } 
+
+#cardfont{
+    color:black;
+    font-size:small;
+    
+  }
+
+#cardbodycolor{
+  background-color:rgba(239, 208, 169, 0.897);
+  font-family:Georgia;
+  
+}
+
+#cardtitle{
+  font-size:100%;
+  color: black;
+}
+
+.red-highlight{
+  color: rgb(168, 2, 2);
+}
+
+#footer-background-image{
+    background-image: url(img/footer.jpg);
+}
+
+#bold-white-color{
+    color:white;
+    font-weight: bold;
+} 
+
+
+#registration{
+
+    width: 200px;
+    margin: auto;
+    margin-bottom: 10px;
+    
+  }
+
+  
+.testimonial-card .card-up {
+    height: 120px;
+    overflow: hidden;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    
+  }
+  
+  .aqua-gradient {
+    background-image: url(img/coverimage.jpg);
+  }
+  
+  .testimonial-card .avatar {
+    width: 120px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 5px solid #fff;
+    border-radius: 50%;
+   
+  }
+
+#center{
+    text-align: center;
+    margin: auto;
+    background-color: rgb(145, 115, 89);
+    border-radius: 30px;
+    border-style: groove;
+}
+
+.center{
+    text-align: center;
+    margin: auto;
+    background-color: rgb(145, 115, 89);
+    border-radius: 30px;
+    border-style: groove;
+    padding: 40px;
+}
+
+.img-fluid{
+  float: left;
+}
+
+#description{
+  color: white;
+  text-align: center;
+  float: left;
+}
+
