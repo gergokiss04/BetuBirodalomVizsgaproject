@@ -9,7 +9,7 @@ namespace BookShopWebAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        [HttpGet("All_books")]
+        [HttpGet("All_book")]
         public IActionResult Getkonyvek()
         {
             using (var context = new bookshopContext())
