@@ -9,7 +9,7 @@ namespace BookShopWebAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        [HttpGet("All_book")]
+        [HttpGet("All_books")]
         public IActionResult Getkonyvek()
         {
             using (var context = new bookshopContext())
@@ -32,13 +32,33 @@ namespace BookShopWebAPI.Controllers
             {
                 using (var context = new bookshopContext())
                 {
-                    return Ok(context.Books
+                    var adat = context.Books
                         .GroupBy(b => b.GenreId)
                         .Select(g => new
                         {
                             Books = g.OrderBy(b => b.Title).Take(4)
                         })
-                        .ToList());
+                        .ToList();
+                    var valami = context.Books.ToList();
+                    Dictionary<int,int> szotar= new Dictionary<int,int>();
+                    List<Book> books = new List<Book>();
+                    foreach (var book in valami)
+                    {
+                        if (szotar.ContainsKey(book.GenreId))
+                        {
+                            if (szotar[book.GenreId] < 4)
+                            {
+                                szotar[book.GenreId] += 1;
+                                books.Add(book);
+                            }
+                        }
+                        else
+                        {
+                            szotar[book.GenreId] = 1;
+                            books.Add(book);
+                        }
+                    }
+                    return Ok(books);
                 }
             }
             catch (Exception ex)
