@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BookShopWebAPI.Models
 {
@@ -26,8 +25,6 @@ namespace BookShopWebAPI.Models
         public string? Description { get; set; }
 
         public virtual Genre Genre { get; set; } = null!;
-
-        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

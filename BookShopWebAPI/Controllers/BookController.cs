@@ -10,23 +10,42 @@ namespace BookShopWebAPI.Controllers
     public class BookController : ControllerBase
     {
         [HttpGet("All_books")]
-
         public IActionResult Getkonyvek()
         {
             using (var context = new bookshopContext())
             {
                 try
                 {
-                    return Ok(context.Books.Include(c=>c.Genre).ToList());
+                    return Ok(context.Books.ToList());
                 }
                 catch (Exception ex)
                 {
-
                     return BadRequest(ex.Message);
                 }
             }
         }
 
+        [HttpGet("Books-by-genre")]
+        public IActionResult GetBooksByGenre()
+        {
+            try
+            {
+                using (var context = new bookshopContext())
+                {
+                    return Ok(context.Books
+                        .GroupBy(b => b.GenreId)
+                        .Select(g => new
+                        {
+                            Books = g.OrderBy(b => b.Title).Take(4)
+                        })
+                        .ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("{id}")]
 
