@@ -10,23 +10,66 @@ namespace BookShopWebAPI.Controllers
     public class BookController : ControllerBase
     {
         [HttpGet("All_books")]
-
         public IActionResult Getkonyvek()
         {
             using (var context = new bookshopContext())
             {
                 try
                 {
-                    return Ok(context.Books.Include(c=>c.Genre).ToList());
+                    return Ok(context.Books.ToList());
                 }
                 catch (Exception ex)
                 {
-
                     return BadRequest(ex.Message);
                 }
             }
         }
 
+        [HttpGet("Books-by-genre")]
+        public IActionResult GetBooksByGenre()
+        {
+            try
+            {
+                using (var context = new bookshopContext())
+                {
+                    var adat = context.Books
+                        .GroupBy(b => b.GenreId)
+                        .Select(g => new
+                        {
+                            Books = g.OrderBy(b => b.Title).Take(4)
+                        })
+                        .ToList();
+                    var valami = context.Books.ToList();
+                    Dictionary<int, int> szotar = new Dictionary<int, int>();
+                    List<Book> books = new List<Book>();
+
+                    foreach (var book in valami)
+                    {
+                        if (szotar.ContainsKey(book.GenreId))
+                        {
+                            if (szotar[book.GenreId] < 4)
+                            {
+                                szotar[book.GenreId] += 1;
+                                books.Add(book);
+                            }
+                        }
+                        else
+                        {
+                            szotar[book.GenreId] = 1;
+                            books.Add(book);
+                        }
+                    }
+
+                    books = books.OrderBy(book => book.GenreId).ToList();
+
+                    return Ok(books);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("{id}")]
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BookShopWebAPI.Models
 {
@@ -15,7 +14,6 @@ namespace BookShopWebAPI.Models
         public int CardNumber { get; set; }
         public int Regularcustomer1 { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }
 }

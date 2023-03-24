@@ -25,9 +25,11 @@ namespace BookShopWebAPI.Models
         public int GenreId { get; set; }
         public string? Description { get; set; }
 
+        [JsonIgnore]
         public virtual Genre Genre { get; set; } = null!;
 
         [JsonIgnore]
+
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

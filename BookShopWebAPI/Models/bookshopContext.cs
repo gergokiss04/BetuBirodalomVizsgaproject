@@ -19,6 +19,7 @@ namespace BookShopWebAPI.Models
         public virtual DbSet<Book> Books { get; set; } = null!;
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Registry> Registries { get; set; } = null!;
         public virtual DbSet<Regularcustomer> Regularcustomers { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -132,6 +133,41 @@ namespace BookShopWebAPI.Models
                     .HasConstraintName("FK_Orders_Users_User_Id");
             });
 
+            modelBuilder.Entity<Registry>(entity =>
+            {
+                entity.ToTable("registry");
+
+                entity.HasIndex(e => e.Key, "key");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Fullname)
+                    .HasMaxLength(50)
+                    .HasColumnName("fullname");
+
+                entity.Property(e => e.Hash)
+                    .HasMaxLength(64)
+                    .HasColumnName("HASH");
+
+                entity.Property(e => e.Key)
+                    .HasMaxLength(64)
+                    .HasColumnName("key");
+
+                entity.Property(e => e.Salt)
+                    .HasMaxLength(64)
+                    .HasColumnName("SALT");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(30)
+                    .HasColumnName("username");
+            });
+
             modelBuilder.Entity<Regularcustomer>(entity =>
             {
                 entity.ToTable("regularcustomers");
@@ -151,25 +187,33 @@ namespace BookShopWebAPI.Models
 
                 entity.HasIndex(e => e.RegularCustomerId, "IX_Users_regularCustomer_Id");
 
+                entity.HasIndex(e => new { e.Username, e.Email }, "username");
+
                 entity.Property(e => e.Id).HasColumnType("int(11)");
 
-                entity.Property(e => e.BornDay).HasColumnType("int(11)");
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
 
-                entity.Property(e => e.BornMonth).HasColumnType("int(11)");
+                entity.Property(e => e.Fullname)
+                    .HasMaxLength(50)
+                    .HasColumnName("fullname");
 
-                entity.Property(e => e.BornYear).HasColumnType("int(11)");
-
-                entity.Property(e => e.Email).HasDefaultValueSql("'NULL'");
-
-                entity.Property(e => e.FirstName).HasDefaultValueSql("'NULL'");
-
-                entity.Property(e => e.LastName).HasDefaultValueSql("'NULL'");
-
-                entity.Property(e => e.Password).HasDefaultValueSql("'NULL'");
+                entity.Property(e => e.Hash)
+                    .HasMaxLength(64)
+                    .HasColumnName("HASH");
 
                 entity.Property(e => e.RegularCustomerId)
                     .HasColumnType("int(11)")
                     .HasColumnName("regularCustomer_Id");
+
+                entity.Property(e => e.Salt)
+                    .HasMaxLength(64)
+                    .HasColumnName("SALT");
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(50)
+                    .HasColumnName("username");
 
                 entity.HasOne(d => d.RegularCustomer)
                     .WithMany(p => p.Users)

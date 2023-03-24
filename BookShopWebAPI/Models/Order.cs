@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BookShopWebAPI.Models
 {
@@ -12,10 +11,7 @@ namespace BookShopWebAPI.Models
         public int StockNumber { get; set; }
         public DateTime OrderDate { get; set; }
 
-        [JsonIgnore]
         public virtual Book Isbnbook { get; set; } = null!;
-
-        [JsonIgnore]
         public virtual User User { get; set; } = null!;
     }
 }
