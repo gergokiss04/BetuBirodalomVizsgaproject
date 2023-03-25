@@ -32,14 +32,7 @@ namespace BookShopWebAPI.Controllers
             {
                 using (var context = new bookshopContext())
                 {
-                    var adat = context.Books
-                        .GroupBy(b => b.GenreId)
-                        .Select(g => new
-                        {
-                            Books = g.OrderBy(b => b.Title).Take(4)
-                        })
-                        .ToList();
-                    var valami = context.Books.ToList();
+                    var valami = context.Books.Include(book => book.Genre).ToList();
                     Dictionary<int, int> szotar = new Dictionary<int, int>();
                     List<Book> books = new List<Book>();
 
@@ -60,9 +53,19 @@ namespace BookShopWebAPI.Controllers
                         }
                     }
 
-                    books = books.OrderBy(book => book.GenreId).ToList();
+                    var response = books
+                        .GroupBy(book => book.Genre.Genre1)
+                        .ToDictionary(group => group.Key, group => group.Select(book => new {
+                            BookId = book.BookId,
+                            Title = book.Title,
+                            Author = book.Author,
+                            Price = book.Price,
+                            Cover= book.Cover,
+                            StockNumber=book.StockNumber,
+                            GenreId=book.GenreId
+                        }).ToList());
 
-                    return Ok(books);
+                    return Ok(response);
                 }
             }
             catch (Exception ex)
